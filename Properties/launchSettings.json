@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SenteApp": {
+      "commandName": "Project",
+      "commandLineArgs": "update-db --connection-string \"User ID=SYSDBA;Password=Brutelike5;Database=D:\\Repos\\SANTE Homework\\sample_tcp.fdb;DataSource=localhost;Port=3050;Dialect=3;Charset=UTF8;\" --scripts-dir \"D:\\Repos\\SANTE Homework\\OutputDir\""
+    }
+  }
+}
