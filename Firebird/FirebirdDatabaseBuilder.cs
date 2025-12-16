@@ -44,9 +44,20 @@ namespace SenteApp.Firebird
 
             var runner = new SqlFileRunner();
 
-            runner.ExecuteFolder(con, Path.Combine(scriptsDirectory, "domains"));
-            runner.ExecuteFolder(con, Path.Combine(scriptsDirectory, "tables"));
-            runner.ExecuteFolder(con, Path.Combine(scriptsDirectory, "procedures"));
+            using var tx = con.BeginTransaction();
+            try
+            {
+                runner.ExecuteFolder(con, tx, Path.Combine(scriptsDirectory, "domains"));
+                runner.ExecuteFolder(con, tx, Path.Combine(scriptsDirectory, "tables"));
+                runner.ExecuteProceduresWithDependencies(con, tx, Path.Combine(scriptsDirectory, "procedures"));
+
+                tx.Commit();
+            }
+            catch
+            {
+                tx.Rollback();
+                throw;
+            }
 
             return dbPath;
         }
