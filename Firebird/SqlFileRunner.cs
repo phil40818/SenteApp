@@ -182,13 +182,7 @@ namespace SenteApp.Firebird
 
                 remaining = nextRemaining;
                 round++;
-            }
-
-            if (!Directory.Exists(proceduresDir))
-            {
-                Console.WriteLine($"[SKIP] Folder not found: {proceduresDir}");
-                return;
-            }            
+            }         
         }
 
         private static HashSet<string> ExtractCalledProcedures(string sql, HashSet<string> knownProcNames)
